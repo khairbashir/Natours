@@ -1,14 +1,59 @@
 @mixin clearfix {
-    &::after {
-        content: "";
-        display: table;
-        clear: none;
-    }    
+  &::after {
+    content: "";
+    display: table;
+    clear: none;
+  }
 }
 
 @mixin absCenter {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//media query
+/*
+0 - 600px:  phone
+600 - 900px: Tablet Portrait
+900 - 1200px: Tablet landscape
+1200 - 1800px normal laptop screen
+1800px + : big desktop
+
+$breakpoint arguments choices
+-phone
+-tab-port
+-tab-land
+-big-desktop
+
+order : base + typography + general layout + grid > page layout > components
+
+1em = 16px
+*/
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 37.5em) {
+      //to convert px to em 600px divide by 16
+      @content;
+    }
+  }
+  @if $breakpoint == tab-port {
+    @media (max-width: 56.25em) {
+      //900
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media (max-width: 75em) {
+      //1200
+      @content;
+    }
+  }
+  @if $breakpoint == big-desktop {
+    @media (min-width: 112.5em) {
+      //1800
+      @content;
+    }
+  }
 }
